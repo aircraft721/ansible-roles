@@ -1,0 +1,5 @@
+- name: Ansible homework
+  hosts: all
+  become: true
+  remote_user: root
+

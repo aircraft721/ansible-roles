@@ -1,0 +1,12 @@
+- name: install apache2
+  apt: name=apache2 update_cache=yes state=latest
+  
+- name: Install ntp
+  yum:
+    name: ntp
+    state: present
+
+- name: Set up Apache virtuahHost
+  template:
+    src: "templates/apache.conf.j2"
+
