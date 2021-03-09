@@ -1,1 +1,5 @@
-http_port: 80
+http_port: 7009
+http_host: "ansible-roles-example.com"
+http_host_dir: "ansible_roles_example"
+http_conf_file: "ansible_roles_example_file"
+source_code_location: "files/source_code"

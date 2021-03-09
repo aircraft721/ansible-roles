@@ -1,12 +1,23 @@
-- name: install apache2
+- name: "Install apache2"
   apt: name=apache2 update_cache=yes state=latest
-  
-- name: Install ntp
-  yum:
-    name: ntp
-    state: present
 
-- name: Set up Apache virtuahHost
+- name: "Create document root"
+  file: 
+    path: "/var/www/{{ http_host_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: "Copy source code"
+  copy: 
+    src: "{{ source_code_location }}"
+    dest: "/var/www/{{ http_host_dir }}"
+
+- name: "Set up Apache virtual Host"
   template:
     src: "templates/apache.conf.j2"
+    dest: "/etc/apache2/sites-available/{{ http_conf_file }}"
 
+- name: "Enable Apache"
+  service: 
+    name: "apache2"
+    enabled: yes
